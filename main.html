@@ -1,15 +1,19 @@
-<html><body>
-	<LINK href="main.css" rel="stylesheet" type="text/css">
+<html>
+<head><LINK href="main.css" rel="stylesheet" type="text/css"></head>
+
+<body>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-	<div id="main">HI
-		<form action="hoster.html">
-	    	<input type="button" value="Host Disco!">
-		</form>
-		<form action="joiner.html">
-	    	<input type="text" value="Join Disco!">
-		</form>
-	</div>
 	<script type="text/javascript" src="main.js"></script>
-	<a href="hoster.html"><div style="width:100px; height:100px; background-color:red; top: 100px;">Host dico?</div></a>
+
+	<div class="full">
+		<a href="joiner.html"><div class="half" id="join">
+			<div class="fakeImage"></div>
+		</div></a>
+		<a href="hoster.html"><div class="half" id="host">
+			<div class="fakeImage"></div>
+		</div></a>
+	</div>
+		
+
 </body>
 </html>
