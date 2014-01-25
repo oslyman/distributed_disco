@@ -1,41 +1,19 @@
-document.getElementById("play").onclick=function(){
-	//document.getElementById("main").innerHTML="New text!";
-	document.getElementById("main").innerHTML="<embed height=\"15\" width=\"300\" src=\"music/rebel.m4a\">"
-	
-}
-
-
-var context;
-window.addEventListener('load', init, false);
-
-function init() {
-	try {
-		window.AudioContext = window.AudioContext||window.webkitAudioContext;
-		context = new AudioContext();
+var songs = ["rebel.m4a", "rebellion.mp3", "youmakeme.m4a", "zeggie.mp3"];
+var names = ["Rebel Rebel - David Bowie", "Rebellion - Arcade Fire", "You Make Me Feel - Cobra Starship", "Zeggie - Afrojack"]
+function init(){
+	newtext = "Pick a song to play!\n"
+	for (var i = 0; i<songs.length; i++){
+		newtext += "<p id=" + i + ">" + names[i] + "</p>";
 	}
-	catch(e) {
-		alert('Web Audio API is not supported in this browser');
+	document.getElementById("main").innerHTML=newtext;
+	for(var i = 0; i<songs.length; i++){
+		document.getElementById(i).onclick=gen_fun(songs[i])
 	}
 }
 
-var songBuffer = null;
-
-function loadSong(url) {
-	var request = new XMLHttpRequest();
-	request.open('GET', url, false);
-	request.responseType = 'arraybuffer';
-
-	request.onload = function() {
-		context.decodeAudioData(request.response, function(buffer) {
-			songBuffer = buffer;
-		}, onError);
-	}
-	request.send();
+function gen_fun(name){
+	return function(){
+			document.getElementById("player").innerHTML="<embed height=\"15\" width=\"300\" autoplay=\"true\" src=\"music/" + name+ "\">";
+		}
 }
-
-function playSong(buffer) {
-	var source = context.createBufferSource();
-	source.buffer = buffer;
-	source.connect(context.destination);
-	source.start();
-}
+init()
