@@ -24,12 +24,9 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-// development only
-// if ('development' == app.get('env')) {
-//   app.use(express.errorHandler());
-// }
-
 app.get('/', routes.index);
+app.get('/hoster', routes.host);
+app.get('/joiner', routes.join);
 
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
@@ -56,7 +53,7 @@ function addJoiner(req, res){
 	res.writeHead(200, {'content-type': 'text/html'});
 	res.speaker = new Speaker();
 	stream.pipe(res.speaker);
-	clients.push(res);
+	clients.push(res);	
 	res.end();
 }
 
@@ -79,4 +76,14 @@ function handleRequest(req, res){
 	}
 
 	res.end();
+}
+
+// function sendData(data){
+// 	clients.forEach(function(client){
+// 		client.write(data);
+// 		decoder.pipe(client.)
+// 	});
+// }
+function playSong(songName){
+	stream.pipe(decoder).pipe(speaker);
 }
